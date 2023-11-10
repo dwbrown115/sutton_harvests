@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import { Home, signin, signup } from "./pages";
+import { home, signin, signup, search } from "./pages";
 import { UserBar, SearchBar } from "./components";
 
 import "./App.scss";
@@ -12,9 +12,11 @@ function App() {
         <UserBar />
         <SearchBar />
         <Routes>
-          <Route path="/" element={Home()} />
+          <Route path="/" element={home()} />
           <Route path="/signin" element={signin()} />
           <Route path="/signup" element={signup()} />
+          <Route path="/search+q/:id" element={search()} />
+          {/* <Route path="*" element={<h1>Not Found</h1>} /> */}
         </Routes>
       </Router>
     </div>
