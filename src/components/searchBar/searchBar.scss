@@ -1,0 +1,15 @@
+.searchBar {
+  background-image: url("../../assets/search.svg");
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  border: none;
+  width: 550px;
+  text-indent: 30px;
+}
+.searchBar:focus {
+  outline: none;
+}
+
+.form {
+}
