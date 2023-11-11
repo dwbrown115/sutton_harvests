@@ -8,15 +8,19 @@ export default function search() {
   useEffect(() => {
     const url = window.location.href;
     const splitUrl = url.split("/search+q/");
-    const search = splitUrl[1].split("&category+")[0];
-    const category = splitUrl[1].split("&category+")[1];
-
+    let search = "";
+    let category = "";
+    if (url.includes("/search+q/")) {
+      search = splitUrl[1].split("&category+")[0];
+      category = splitUrl[1].split("&category+")[1];
+    }
     setUrl(url);
     setSearch(search.replaceAll("+", " "));
     setCategory(category);
   }, []);
+
   return (
-    <div className="px-10">
+    <div className="px-10 pt-2">
       <div>Search Results</div>
       <div>{url}</div>
       <div>{search}</div>
