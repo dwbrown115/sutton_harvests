@@ -15,7 +15,14 @@ function App() {
         <Route path="/signin" element={signin()} />
         <Route path="/signup" element={signup()} />
         <Route path="/search+q/:id" element={search()} />
-        {/* <Route path="*" element={<h1>Not Found</h1>} /> */}
+        <Route
+          path="*"
+          element={
+            <h1 className="text-center	align-middle mt-20 text-2xl	">
+              404 Page Not Found
+            </h1>
+          }
+        />
       </Routes>
     </div>
   );

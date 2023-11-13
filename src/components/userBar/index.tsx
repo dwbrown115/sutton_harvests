@@ -18,20 +18,20 @@ export default function userBar() {
     >
       <div className="flex items-center">
         <Link
-          className="mx-2 pt-1 text-blue hover:text-purple  border-b border-blue hover:border-purple"
+          className="mx-2 my-1 text-blue hover:text-purple  border-b border-blue hover:border-purple"
           to="/signin"
         >
           Sign In
         </Link>
-        <span className="mr-2 pt-1">or</span>
+        <span className="mr-2 my-1">or</span>
         <Link
-          className="mr-2 pt-1 text-blue hover:text-purple border-b border-blue hover:border-purple"
+          className="mr-2 my-1 text-blue hover:text-purple border-b border-blue hover:border-purple"
           to="/signup"
         >
           Sign Up
         </Link>
         <Link
-          className="mr-2 pt-1 border-b border-white hover:border-black"
+          className="mr-2 my-1 border-b border-white hover:border-black"
           to="/help"
         >
           Help & Contact
@@ -39,13 +39,13 @@ export default function userBar() {
       </div>
       <div className="flex items-center">
         <Link
-          className="mx-2 pt-1 border-b border-white hover:border-black"
+          className="mx-2 my-1 border-b border-white hover:border-black"
           to={"/sell"}
         >
           Sell
         </Link>
         <Link
-          className="mx-2 pt-1 border-b border-white hover:border-black"
+          className="mx-2 my-1 border-b border-white hover:border-black"
           to={"/orders"}
         >
           My Orders
@@ -59,7 +59,7 @@ export default function userBar() {
             setShowAccount("none");
             setShowAccountHr("transparent");
           }}
-          className="flex pt-1 flex-col border-t border-l border-r border-white hover:border-slate-400"
+          className="flex my-1 flex-col border-t border-l border-r border-white hover:border-slate-400"
         >
           <Link className="flex px-2" to={"/account"}>
             My account
@@ -118,7 +118,7 @@ export default function userBar() {
         </div>
 
         <div
-          className="flex pt-1 flex-col border-t border-l border-r border-white hover:border-slate-400"
+          className="flex my-1 flex-col border-t border-l border-r border-white hover:border-slate-400"
           onMouseOver={() => {
             setShowNotifications("flex");
             setShowNotificationsHr("white");
@@ -160,7 +160,7 @@ export default function userBar() {
               Please{" "}
               <span>
                 <Link
-                  className="mr-1 pt-1 text-blue hover:text-purple  border-b border-blue hover:border-purple"
+                  className="mr-1 my-1 text-blue hover:text-purple  border-b border-blue hover:border-purple"
                   to={"/signin"}
                 >
                   sign in
@@ -171,7 +171,7 @@ export default function userBar() {
           </div>
         </div>
         <div
-          className="flex pt-1 flex-col border-t border-l border-r border-white hover:border-slate-400"
+          className="flex my-1 flex-col border-t border-l border-r border-white hover:border-slate-400"
           onMouseOver={() => {
             setShowShoppingCart("flex");
             setShowShoppingCartHr("white");
