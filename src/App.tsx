@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
-import { signin, signup } from "./pages/Auth";
+import { signin, signup, forgotPassword } from "./pages/Auth";
 import { home, search } from "./pages";
 import { UserBar, SearchBar, VerifyEmailBar } from "./components";
 
@@ -16,6 +16,7 @@ function App() {
         <Route path="/" element={home()} />
         <Route path="/signin" element={signin()} />
         <Route path="/signup" element={signup()} />
+        <Route path="/forgot-password" element={forgotPassword()} />
         <Route path="/search+q/:id" element={search()} />
         <Route
           path="*"

@@ -7,4 +7,5 @@ export { default as updateData } from "./firestore/updateData";
 // export { default as logOut } from "./auth/signOut";
 // export { default as signUp } from "./auth/signUp";
 export { default as signUp } from "./auth/signup.ts";
+export { default as signIn } from "./auth/signin.ts";
 export { default as logOut } from './auth/logOut.ts' 

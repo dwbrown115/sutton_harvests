@@ -56,6 +56,12 @@ export default function userBar() {
     }
   }
 
+  function handleSignout() {
+    logOut();
+    router(0);
+    router("/");
+  }
+
   function handleUser() {
     return (
       <div>
@@ -142,7 +148,7 @@ export default function userBar() {
               </div>
               <div>
                 <button
-                  onClick={() => {logOut(); router('/');}}
+                  onClick={handleSignout}
                   className="mb-2 mx-2 hover:underline text-left"
                 >
                   Sign Out
