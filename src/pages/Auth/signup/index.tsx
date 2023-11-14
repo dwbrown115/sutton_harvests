@@ -60,11 +60,29 @@ export default function signup() {
       return;
     } else {
       if (accountType === "personal") {
-        const name = firstName + " " + lastName;
-        signUp(email, password, name, state, "personal");
+        const name = firstName;
+        const time = Date().toLocaleString();
+        const data = {
+          email,
+          name,
+          lastName,
+          state,
+          accountCreated: time,
+          accountType: "personal"
+        };
+        signUp(email, password, data);
         navigate("/");
       } else if (accountType === "business") {
-        signUp(email, password, businessName, state, "business");
+        const time = Date().toLocaleString();
+        const name = businessName
+        const data = {
+          email,
+          name,
+          state,
+          accountCreated: time,
+          accountType: "business"
+        };
+        signUp(email, password, data);
         navigate("/");
       }
     }

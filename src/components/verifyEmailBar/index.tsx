@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { getAuth, sendEmailVerification } from "firebase/auth";
 
 import { firebase_app } from "../../firebase";
-import { set } from "firebase/database";
 
 export default function verifyEmailBar() {
   const auth = getAuth(firebase_app);

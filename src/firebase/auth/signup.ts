@@ -10,9 +10,7 @@ import firebase_app from "../config";
 export default async function signUp(
   email: string,
   password: string,
-  name: string,
-  state: string,
-  type: string
+  data: any,
 ) {
   const auth = getAuth(firebase_app);
   try {
@@ -21,15 +19,8 @@ export default async function signUp(
         if (auth.currentUser) {
           await sendEmailVerification(auth.currentUser);
           try {
-            const collection = `Users/AccountType/${type}`;
+            const collection = `Users`;
             const id = auth.currentUser.uid;
-            const time = Date().toLocaleString();
-            const data = {
-              email,
-              name,
-              state,
-              accountCreated: time,
-            };
             await addData(collection, id, data);
             // navigate("/user/authentication");
           } catch (e) {
