@@ -1,7 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
-import { home, signin, signup, search } from "./pages";
-import { UserBar, SearchBar } from "./components";
+import { signin, signup } from "./pages/Auth";
+import { home, search } from "./pages";
+import { UserBar, SearchBar, VerifyEmailBar } from "./components";
 
 import "./App.scss";
 
@@ -10,6 +11,7 @@ function App() {
     <div className="">
       <UserBar />
       <SearchBar />
+      <VerifyEmailBar />
       <Routes>
         <Route path="/" element={home()} />
         <Route path="/signin" element={signin()} />

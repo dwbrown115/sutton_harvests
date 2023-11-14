@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-import { signUp } from "../../firebase";
+import { signUp } from "../../../firebase";
 
 export default function signup() {
   // const auth = getAuth(firebase_app);
@@ -62,10 +62,10 @@ export default function signup() {
       if (accountType === "personal") {
         const name = firstName + " " + lastName;
         signUp(email, password, name, state, "personal");
-        navigate("/dashboard");
+        navigate("/");
       } else if (accountType === "business") {
         signUp(email, password, businessName, state, "business");
-        navigate("/dashboard");
+        navigate("/");
       }
     }
   }

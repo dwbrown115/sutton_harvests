@@ -129,7 +129,7 @@ export default function userBar() {
           }}
         >
           <img
-            className="flex mx-2 hover:cursor-pointer"
+            className="flex mx-2 my-1 hover:cursor-pointer"
             src={notifications}
             alt="notifications.svg"
             style={{ height: "25px" }}
@@ -150,7 +150,7 @@ export default function userBar() {
             style={{
               display: `${showNotifications}`,
               marginLeft: "-371px",
-              marginTop: "25px",
+              marginTop: "33px",
             }}
           >
             <div
@@ -183,7 +183,7 @@ export default function userBar() {
         >
           <Link className="flex  hover:cursor-pointer" to={"/cart"}>
             <img
-              className="mx-2"
+              className="mx-2 my-1"
               src={shoppingCart}
               alt="shoppingCart.svg"
               style={{ width: "25px" }}
@@ -205,7 +205,7 @@ export default function userBar() {
             style={{
               display: `${showShoppingCart}`,
               marginLeft: "-244.5px",
-              marginTop: "25px",
+              marginTop: "33px",
             }}
           >
             <div className="pl-5 pb-5 w-2/3">
