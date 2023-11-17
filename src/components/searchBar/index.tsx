@@ -17,7 +17,7 @@ export default function searchBar() {
     )}&category+${category}`;
 
     router(queryUrl);
-    router(0)
+    router(0);
   };
   return (
     <div className="px-8 py-3 flex justify-between border-b border-slate-400">

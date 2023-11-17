@@ -128,7 +128,7 @@ export default function userBar() {
                     {name} {lastName}
                   </div>
                   {userName === "Choose a username" ? (
-                    <Link className="underline" to={"/account-settings"}>
+                    <Link className="underline" to={"/account/profile"}>
                       Choose a username
                     </Link>
                   ) : (
@@ -141,7 +141,7 @@ export default function userBar() {
               <div>
                 <Link
                   className="my-2 mx-2 hover:underline inline-block"
-                  to={"/account-settings"}
+                  to={"/account/settings"}
                 >
                   Account Settings
                 </Link>

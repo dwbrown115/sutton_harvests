@@ -1,6 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 
-import { signin, signup, forgotPassword } from "./pages/Auth";
+import {
+  accountActivity,
+  accountMessages,
+  accountSettings,
+} from "./pages/Account";
+import { forgotPassword, signin, signup } from "./pages/Auth";
+import { sell, user } from "./pages/SellerPages";
 import { home, search } from "./pages";
 import { UserBar, SearchBar, VerifyEmailBar } from "./components";
 
@@ -14,10 +20,19 @@ function App() {
       <VerifyEmailBar />
       <Routes>
         <Route path="/" element={home()} />
+        {/*Account pages*/}
+        <Route path="/account/activity" element={accountActivity()} />
+        <Route path="/account/messages" element={accountMessages()} />
+        <Route path="/account/settings" element={accountSettings()} />
+        {/*Auth pages*/}
+        <Route path="/forgot-password" element={forgotPassword()} />
         <Route path="/signin" element={signin()} />
         <Route path="/signup" element={signup()} />
-        <Route path="/forgot-password" element={forgotPassword()} />
+        {/*Seller pages*/}
+        <Route path="/sell" element={sell()} />
+        {/*Buy pages*/}
         <Route path="/search+q/:id" element={search()} />
+        <Route path="/user/:id" element={user()} />
         <Route
           path="*"
           element={

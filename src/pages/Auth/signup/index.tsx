@@ -68,19 +68,19 @@ export default function signup() {
           lastName,
           state,
           accountCreated: time,
-          accountType: "personal"
+          accountType: "personal",
         };
         signUp(email, password, data);
         navigate("/");
       } else if (accountType === "business") {
         const time = Date().toLocaleString();
-        const name = businessName
+        const name = businessName;
         const data = {
           email,
           name,
           state,
           accountCreated: time,
-          accountType: "business"
+          accountType: "business",
         };
         signUp(email, password, data);
         navigate("/");
