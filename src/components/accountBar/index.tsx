@@ -12,6 +12,11 @@ export default function accountBar() {
 
   const [userName, setUserName] = useState("");
 
+  const style = ({ isActive }: { isActive: boolean }) =>
+    isActive
+      ? "mx-2 py-2 border-b-2 border-black"
+      : "mx-2 py-2 border-b-2 border-transparent hover:border-black";
+
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -43,35 +48,14 @@ export default function accountBar() {
     <div className="my-2 mx-8">
       <div className="flex flex-row justify-between">
         <div>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "mx-2 py-2 border-b-2 border-black"
-                : "mx-2 py-2 border-b-2 border-transparent hover:border-black"
-            }
-            to="/account/activity"
-          >
+          <NavLink className={style} to="/activity">
             Activity
           </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "mx-2 py-2 border-b-2 border-black"
-                : "mx-2 py-2 border-b-2 border-transparent hover:border-black"
-            }
-            to="/account/messages"
-          >
+          <NavLink className={style} to="/messages">
             Messages
           </NavLink>
-          <NavLink
-            className={({ isActive }) =>
-              isActive
-                ? "mx-2 py-2 border-b-2 border-black"
-                : "mx-2 py-2 border-b-2 border-transparent hover:border-black"
-            }
-            to="/account/settings"
-          >
-            Settings
+          <NavLink className={style} to="/account">
+            Account
           </NavLink>
         </div>
         <div className="mx-2 flex">

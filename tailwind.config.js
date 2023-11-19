@@ -11,11 +11,12 @@ export default {
         ".5px": "2.97px",
       },
       colors: {
-        "red": "#FF0000",
-        "blue": "#0000FF",
-        "purple": "#800080",
+        red: "#FF0000",
+        blue: "#0000FF",
+        purple: "#800080",
         "3665f3": "#3665f3",
-      }
+        sidebarGray: "#e5e5e5",
+      },
     },
   },
   plugins: [],
