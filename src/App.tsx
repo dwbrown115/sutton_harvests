@@ -1,7 +1,11 @@
 import { Routes, Route } from "react-router-dom";
 
 // Account bar pages
-import { accountActivity, accountMessages, account } from "./pages/AccountBarPages";
+import {
+  accountActivity,
+  accountMessages,
+  account,
+} from "./pages/AccountBarPages";
 
 // Account pages
 import { paymentMethods } from "./pages/AccountBarPages/accountPages/paymentInfo";
@@ -33,7 +37,7 @@ function App() {
         <Route path="/messages" element={accountMessages()} />
         <Route path="/account" element={account()} />
         {/*Account Info pages*/}
-        <Route path="/account/settings" element={accountSettings()} />
+        <Route path="/account/info" element={accountSettings()} />
         <Route path="/account/security-settings" element={securitySettings()} />
         <Route path="/account/addresses" element={addresses()} />
         {/*Payment Info pages*/}

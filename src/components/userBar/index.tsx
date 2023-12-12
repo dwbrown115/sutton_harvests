@@ -141,7 +141,7 @@ export default function userBar() {
               <div>
                 <Link
                   className="my-2 mx-2 hover:underline inline-block"
-                  to={"/account/settings"}
+                  to={"/account/info"}
                 >
                   Account Settings
                 </Link>

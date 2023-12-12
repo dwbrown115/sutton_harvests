@@ -1,6 +1,7 @@
 import { AccountBar, AccountSidebar } from "../../../../components";
 
 export default function Account() {
+
   return (
     <div>
       <AccountBar />

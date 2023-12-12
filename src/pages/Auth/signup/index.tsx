@@ -68,7 +68,7 @@ export default function signup() {
           lastName,
           state,
           accountCreated: time,
-          accountType: "personal",
+          accountType: "Personal",
         };
         signUp(email, password, data);
         navigate("/");
@@ -80,7 +80,7 @@ export default function signup() {
           name,
           state,
           accountCreated: time,
-          accountType: "business",
+          accountType: "Business",
         };
         signUp(email, password, data);
         navigate("/");

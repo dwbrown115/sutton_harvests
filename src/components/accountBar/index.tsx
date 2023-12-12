@@ -14,8 +14,8 @@ export default function accountBar() {
 
   const style = ({ isActive }: { isActive: boolean }) =>
     isActive
-      ? "mx-2 py-2 border-b-2 border-black"
-      : "mx-2 py-2 border-b-2 border-transparent hover:border-black";
+      ? "mx-px px-10 py-2 border-b-2 border-blue text-blue"
+      : "mx-px px-10 py-2 border-b-2 border-transparent hover:border-blue hover:text-blue";
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -45,7 +45,7 @@ export default function accountBar() {
   }
 
   return (
-    <div className="my-2 mx-8">
+    <div className="mb-5 mt-4 mx-8">
       <div className="flex flex-row justify-between">
         <div>
           <NavLink className={style} to="/activity">
