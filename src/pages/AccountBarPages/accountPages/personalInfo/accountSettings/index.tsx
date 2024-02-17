@@ -2,14 +2,22 @@ import { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 
+import { avatar } from "../../../../../assets";
 import { AccountBar, AccountSidebar } from "../../../../../components";
-import { firebase_app, updateData } from "../../../../../firebase";
+import {
+  firebase_app,
+  updateData,
+  uploadImages,
+} from "../../../../../firebase";
 
 export default function accountSettings() {
   const auth = getAuth(firebase_app);
   const db = getFirestore(firebase_app);
   const user = auth.currentUser;
 
+  const [editProfilePicture, setEditProfilePicture] = useState(false);
+  const [profilePictureArray, setProfilePictureArray] = useState<any[]>([]);
+  const [profilePicture, setProfilePicture] = useState("");
   const [editUserName, setEditUserName] = useState(false);
   const [userName, setUserName] = useState("");
   const [editName, setEditName] = useState(false);
@@ -39,6 +47,8 @@ export default function accountSettings() {
         const data = docSnap.data();
         if (data) {
           if (data["userName"]) {
+            setProfilePicture(data["profilePicture"]);
+            console.log(data["profilePicture"]);
             setUserName(data["userName"]);
             setFirstName(data["name"]);
             setMiddleName(data["middleName"]);
@@ -71,6 +81,99 @@ export default function accountSettings() {
     });
   }, [user]);
 
+  function handleImages(e: any) {
+    if (e.target.files) {
+      let imagesArr = Array.from(e.target.files);
+      setProfilePictureArray(imagesArr);
+    }
+  }
+
+  function handleEditProfilePictureForm(e: any) {
+    e.preventDefault();
+    setEditProfilePicture(false);
+    if (auth.currentUser) {
+      // uploadImages("Users", auth.currentUser.uid, profilePictureArray);
+      uploadImages(
+        profilePictureArray,
+        `Users/${auth.currentUser.uid}`,
+        `${auth.currentUser.uid}_profilePicture`
+      ).then((res) => {
+        if (auth.currentUser) {
+          updateData("Users", auth.currentUser.uid, { profilePicture: res });
+        }
+      });
+    }
+  }
+
+  function handleEditProfilePicture() {
+    return (
+      <div className="py-8 flex">
+        <div className="w-1/3 font-semibold">Profile Picture</div>
+        {editProfilePicture ? (
+          <form
+            onSubmit={handleEditProfilePictureForm}
+            className="flex flex-col w-1/3"
+          >
+            <input
+              className="border border-gray-700 px-4 py-2 w-full bg-gray-50"
+              type="file"
+              onChange={(e) => {
+                handleImages(e);
+              }}
+              required
+            />
+            <div className="mt-2 justify-between flex">
+              <button
+                type="button"
+                className="rounded-xl px-4 py-3 border border-sky-600 text-sky-600 hover:bg-sky-600 hover:text-white  w-12/25 text-sm"
+                onClick={() => {
+                  setEditProfilePicture(false);
+                }}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="rounded-xl px-4 py-3 border border-gray-600 text-white bg-gray-600 hover:bg-transparent hover:text-gray-600 w-12/25 text-sm"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        ) : (
+          <div className="flex w-full">
+            <div>
+              {profilePicture !== undefined ? (
+                <img
+                  className="w-20 h-20"
+                  src={profilePicture}
+                  alt="Profile Picture"
+                />
+              ) : (
+                <img
+                  className="w-20 h-20"
+                  src={avatar}
+                  alt="Profile Picture"
+                />
+              )}
+            </div>
+            <div className="text-blue hover:text-purple underline cursor-pointer ml-auto">
+              <label
+                htmlFor="file-upload"
+                className="cursor-pointer"
+                onClick={() => {
+                  setEditProfilePicture(true);
+                }}
+              >
+                Edit
+              </label>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   function handleEditUserNameForm(e: any) {
     e.preventDefault();
     setEditUserName(false);
@@ -89,7 +192,7 @@ export default function accountSettings() {
             className="flex flex-col w-1/3"
           >
             <input
-              className="border border-black rounded-md px-4 py-2 w-full bg-gray-50"
+              className="border border-gray-700 px-4 py-2 w-full bg-gray-50"
               type="text"
               value={userName}
               onChange={(e) => {
@@ -151,7 +254,7 @@ export default function accountSettings() {
           <form onSubmit={handleEditNameForm} className="flex flex-col w-1/3">
             <div className="flex flex-col">
               <input
-                className="border border-black rounded-md px-4 py-2 w-full bg-gray-50 mx-auto mb-2"
+                className="border border-gray-700 px-4 py-2 w-full bg-gray-50 mx-auto mb-2"
                 type="text"
                 placeholder="First Name"
                 value={firstName}
@@ -160,7 +263,7 @@ export default function accountSettings() {
                 }}
               />
               <input
-                className="border border-black rounded-md px-4 py-2 w-full bg-gray-50 mx-auto mb-2"
+                className="border border-gray-700 px-4 py-2 w-full bg-gray-50 mx-auto mb-2"
                 type="text"
                 placeholder="Middle Name"
                 value={middleName}
@@ -169,7 +272,7 @@ export default function accountSettings() {
                 }}
               />
               <input
-                className="border border-black rounded-md px-4 py-2 w-full bg-gray-50 mx-auto mb-2"
+                className="border border-gray-700 px-4 py-2 w-full bg-gray-50 mx-auto mb-2"
                 type="text"
                 placeholder="Last Name"
                 value={lastName}
@@ -233,7 +336,7 @@ export default function accountSettings() {
             className="flex flex-col w-1/3"
           >
             <select
-              className="border border-black rounded-md px-4 py-2 w-full bg-gray-50"
+              className="border border-gray-700 px-4 py-2 w-full bg-gray-50"
               value={accountType}
               onChange={(e) => {
                 setAccountType(e.target.value);
@@ -305,7 +408,7 @@ export default function accountSettings() {
                 className="flex flex-col w-1/3"
               >
                 <input
-                  className="border border-black rounded-md px-4 py-2 w-full bg-gray-50"
+                  className="border border-gray-700 px-4 py-2 w-full bg-gray-50"
                   type="text"
                   value={email}
                   onChange={(e) => {
@@ -357,7 +460,7 @@ export default function accountSettings() {
                 className="flex flex-col w-1/3"
               >
                 <input
-                  className="border border-black rounded-md px-4 py-2 w-full bg-gray-50"
+                  className="border border-gray-700 px-4 py-2 w-full bg-gray-50"
                   type="text"
                   value={phoneNumber}
                   onChange={(e) => {
@@ -429,7 +532,7 @@ export default function accountSettings() {
           >
             <div className="flex flex-col">
               <div className="flex justify-between">
-                <div className="border border-black rounded-md px-4 py-2 w-12/25 bg-gray-50 mb-2">
+                <div className="border border-gray-700 px-4 py-2 w-12/25 bg-gray-50 mb-2">
                   <div className="text-xs">Street address</div>
                   <input
                     className="focus:outline-none bg-gray-50 text-sm"
@@ -441,7 +544,7 @@ export default function accountSettings() {
                     }}
                   />
                 </div>
-                <div className="border border-black rounded-md px-4 py-2 w-12/25 bg-gray-50 mb-2">
+                <div className="border border-gray-700 px-4 py-2 w-12/25 bg-gray-50 mb-2">
                   <div className="text-xs">Street address 2</div>
                   <input
                     className="focus:outline-none bg-gray-50 text-sm"
@@ -455,7 +558,7 @@ export default function accountSettings() {
                 </div>
               </div>
               <div className="flex justify-between">
-                <div className="border border-black rounded-md px-4 py-2 w-12/25 bg-gray-50 mb-2">
+                <div className="border border-gray-700 px-4 py-2 w-12/25 bg-gray-50 mb-2">
                   <div className="text-xs">City</div>
                   <input
                     className="focus:outline-none bg-gray-50 text-sm"
@@ -468,7 +571,7 @@ export default function accountSettings() {
                   />
                 </div>
                 <select
-                  className="border border-black rounded-md px-4 py-2 w-12/25 bg-gray-50 mb-2"
+                  className="border border-gray-700 px-4 py-2 w-12/25 bg-gray-50 mb-2"
                   placeholder="Select state"
                   value={state}
                   onChange={(e) => setState(e.target.value)}
@@ -526,7 +629,7 @@ export default function accountSettings() {
                   <option value="WY">Wyoming</option>
                 </select>
               </div>
-              <div className="border border-black rounded-md px-4 py-2 w-12/25 bg-gray-50 mb-2">
+              <div className="border border-gray-700 px-4 py-2 w-12/25 bg-gray-50 mb-2">
                 <div className="text-xs">Zip code</div>
                 <input
                   className="focus:outline-none bg-gray-50 text-sm"
@@ -601,6 +704,8 @@ export default function accountSettings() {
                 Account Info
               </h1>
             </div>
+            <hr className="h-px" />
+            {handleEditProfilePicture()}
             <hr className="h-px" />
             {handleEditUserName()}
             <hr className="h-px" />

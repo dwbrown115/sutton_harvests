@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { firebase_app, logOut } from "../../firebase";
 import { notifications, shoppingCart, expand, avatar } from "../../assets";
+import { set } from "firebase/database";
 
 export default function userBar() {
   const router = useNavigate();
@@ -22,6 +23,7 @@ export default function userBar() {
   const [showShoppingCartHr, setShowShoppingCartHr] = useState("transparent");
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [profilePicture, setProfilePicture] = useState("");
   const [userName, setUserName] = useState("Choose a username");
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -47,6 +49,7 @@ export default function userBar() {
           if (data["userName"]) {
             setUserName(data["userName"]);
           }
+          setProfilePicture(data["profilePicture"]);
           setName(data["name"]);
           setLastName(data["lastName"]);
         }
@@ -117,12 +120,21 @@ export default function userBar() {
               }}
             >
               <div className="flex">
-                <img
-                  className="mx-2"
-                  src={avatar}
-                  alt="avatar.svg"
-                  style={{ width: "60px" }}
-                />
+                {profilePicture !== undefined ? (
+                  <img
+                    className="mx-2"
+                    src={profilePicture}
+                    alt="avatar.svg"
+                    style={{ width: "60px" }}
+                  />
+                ) : (
+                  <img
+                    className="mx-2"
+                    src={avatar}
+                    alt="avatar.svg"
+                    style={{ width: "60px" }}
+                  />
+                )}
                 <div className="mr-2 flex flex-col ">
                   <div className="mb-1">
                     {name} {lastName}
