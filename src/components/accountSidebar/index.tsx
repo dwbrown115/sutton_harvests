@@ -5,7 +5,7 @@ export default function accountSidebar() {
     isActive ? "px-5 py-2.5 bg-slate-200" : "px-5 py-2.5 hover:underline";
 
   return (
-    <div className="flex flex-col mr-8 w-1/6">
+    <div className="flex flex-col mr-8 min-w-1/6">
       <div className="flex flex-col">
         <div className="my-1">Personal Information</div>
         <div className="flex flex-col">
@@ -31,12 +31,12 @@ export default function accountSidebar() {
       <div className="flex flex-col">
         <div className="my-1">Sales Information</div>
         <div className="flex flex-col">
-          <NavLink className={style} to="/account/sales-dashboard">
+          <NavLink className={style} to="/sales/dashboard">
             Seller Dashboard
           </NavLink>
-          <NavLink className={style} to="/account/sales">
+          {/* <NavLink className={style} to="/account/sales">
             Seller Account
-          </NavLink>
+          </NavLink> */}
         </div>
       </div>
     </div>

@@ -37,14 +37,15 @@ export default function searchBar() {
             onChange={(e) => setSearch(e.target.value)}
           />
           <select
-            className="px-2 py-1 h-1/1 focus:outline-none border-l border-slate-400 w-52"
+            className="px-2 py-1 h-1/1 focus:outline-none border-l border-slate-400 w-52 hover:cursor-pointer"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
             <option value="All">All</option>
-            <option value="Fruit">Fruit</option>
-            <option value="Vegetable">Vegetable</option>
-            <option value="Herb">Herb</option>
+            <option value="Fruit">Fruits</option>
+            <option value="Vegetable">Vegetables</option>
+            <option value="Mushroom">Mushrooms</option>
+            <option value="Herb">Herbs</option>
             <option value="Nuts">Nuts</option>
             <option value="Grains">Grains</option>
             <option value="Meat">Meat</option>

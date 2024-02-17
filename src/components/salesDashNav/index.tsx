@@ -5,7 +5,7 @@ import { NavLink, Link } from "react-router-dom";
 
 import { firebase_app } from "../../firebase";
 
-export default function accountBar() {
+export default function SalesDashNav() {
   const auth = getAuth(firebase_app);
   const db = getFirestore(firebase_app);
   const user = auth.currentUser;
@@ -14,8 +14,8 @@ export default function accountBar() {
 
   const style = ({ isActive }: { isActive: boolean }) =>
     isActive
-      ? "mx-px px-10 py-2 border-b-2 border-blue text-blue"
-      : "mx-px px-10 py-2 border-b-2 border-transparent hover:border-black hover:text-black";
+      ? "mx-px px-10 py-2 border-b-2 border-black text-black"
+      : "mx-px px-10 py-2 border-b-2 border-transparent text-gray-600 hover:border-black hover:text-black";
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
@@ -45,17 +45,20 @@ export default function accountBar() {
   }
 
   return (
-    <div className="mb-5 mt-4 mx-8">
+    <div className="my-5">
       <div className="flex flex-row justify-between">
         <div>
-          <NavLink className={style} to="/activity">
-            Activity
+          <NavLink className={style} to="/sales/dashboard">
+            Dashboard
           </NavLink>
-          <NavLink className={style} to="/messages">
-            Messages
+          <NavLink className={style} to="/sales/orders">
+            Orders
           </NavLink>
-          <NavLink className={style} to="/account">
-            Account
+          <NavLink className={style} to="/sales/listings">
+            Listings
+          </NavLink>
+          <NavLink className={style} to="/sales/summary">
+            Summary
           </NavLink>
         </div>
         <div className="mx-2 flex">
@@ -68,7 +71,7 @@ export default function accountBar() {
           </Link>
         </div>
       </div>
-      <hr className="mx-2 border-1" style={{ marginTop: "8.8px" }} />
+      <hr className=" border-1" style={{ marginTop: "8.8px" }} />
     </div>
   );
 }

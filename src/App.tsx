@@ -14,7 +14,18 @@ import {
   securitySettings,
   addresses,
 } from "./pages/AccountBarPages/accountPages/personalInfo";
-import { sellerAccount, sellerDashboard, user } from "./pages/SellerPages";
+// Sales pages
+import {
+  sell,
+  // sellerAccount,
+  sellerDashboard,
+  sellerListings,
+  sellerOrders,
+  sellerSummary,
+  listingPage,
+  createListing,
+  user,
+} from "./pages/SellerPages";
 
 // Auth pages
 import { forgotPassword, signin, signup } from "./pages/Auth";
@@ -43,8 +54,14 @@ function App() {
         {/*Payment Info pages*/}
         <Route path="/account/payment-methods" element={paymentMethods()} />
         {/*Sales Info pages*/}
-        <Route path="/account/sales-dashboard" element={sellerDashboard()} />
-        <Route path="/account/sales" element={sellerAccount()} />
+        <Route path="/sales/dashboard/sell" element={sell()} />
+        <Route path="/sales/dashboard" element={sellerDashboard()} />
+        <Route path="/sales/listings" element={sellerListings()} />
+        <Route path="/sales/orders" element={sellerOrders()} />
+        <Route path="/sales/summary" element={sellerSummary()} />
+        <Route path="/listing/:id" element={listingPage()} />
+        <Route path="/seller/create-listing" element={createListing()} />
+        {/* <Route path="/account/sales" element={sellerAccount()} /> */}
         {/*Auth pages*/}
         <Route path="/forgot-password" element={forgotPassword()} />
         <Route path="/signin" element={signin()} />

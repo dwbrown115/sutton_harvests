@@ -173,7 +173,7 @@ export default function userBar() {
         </Link>
       </div>
       <div className="flex items-center">
-        <Link className="mx-2 my-1 hover:underline" to={"/sell"}>
+        <Link className="mx-2 my-1 hover:underline" to={"/sales/dashboard"}>
           Sell
         </Link>
         <Link className="mx-2 my-1 hover:underline" to={"/orders"}>

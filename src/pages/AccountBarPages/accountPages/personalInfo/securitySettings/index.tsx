@@ -130,7 +130,7 @@ export default function securitySettings() {
           <AccountSidebar />
           <div className="w-full">
             <div>
-              <h1 className="text-3xl font-semibold pb-6">
+              <h1 className="text-3xl font-semibold text-gray-700	 pb-6">
                 Sign in and Security
               </h1>
             </div>

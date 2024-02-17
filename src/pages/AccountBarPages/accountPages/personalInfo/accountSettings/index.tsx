@@ -597,7 +597,9 @@ export default function accountSettings() {
           <AccountSidebar />
           <div className="w-full">
             <div>
-              <h1 className="text-3xl font-semibold pb-6">Account Info</h1>
+              <h1 className="text-3xl font-semibold text-gray-700	 pb-6">
+                Account Info
+              </h1>
             </div>
             <hr className="h-px" />
             {handleEditUserName()}
