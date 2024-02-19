@@ -15,3 +15,7 @@ export const FIREBASE_MEASUREMENT_ID = `${
 export const FIREBASE_MESSAGING_SENDER_ID = `${
   import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID
 }`;
+export const ALGOLIA_APPLICATION_ID = `${
+  import.meta.env.VITE_ALGOLIA_APPLICATION_ID
+}`;
+export const ALGOLIA_SEARCH_KEY = `${import.meta.env.VITE_ALGOLIA_SEARCH_KEY}`;

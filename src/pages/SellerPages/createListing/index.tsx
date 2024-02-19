@@ -1,9 +1,15 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { getAuth } from "firebase/auth";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+import {
+  arrayUnion,
+  setDoc,
+  doc,
+  getDoc,
+  getFirestore,
+} from "firebase/firestore";
 
-import { uploadImages, databaseAddData, firebase_app } from "../../../firebase";
+import { uploadImages, firebase_app, addData } from "../../../firebase";
 import { makeId } from "../../../helpers";
 
 import "./createListing.scss";
@@ -115,9 +121,21 @@ export default function createListing() {
     uploadImages(images, "listings", title).then((urls) => {
       listing["images"] = urls;
       // setListing({ ...listing, images: urls });
-      databaseAddData(`listings/${id}`, listing).then((res) => {
-        console.log(res);
+      // databaseAddData(`listings/${id}`, listing).then((res) => {
+      //   console.log(res);
+      // });
+      addData("listings", id, listing).then(() => {
+        if (auth.currentUser) {
+          setDoc(
+            doc(db, "Users", auth.currentUser.uid),
+            {
+              listings: arrayUnion(id),
+            },
+            { merge: true }
+          );
+        }
       });
+
       console.log(listing);
       setUploadComplete(true);
       // setMessage("Your listing has been created!");
@@ -267,9 +285,12 @@ export default function createListing() {
                 required
               >
                 <option value="none">Select</option>
+                <option value="unit">Per unit</option>
+                <option value="dozen">Per dozen</option>
                 <option value="lb">Per lb</option>
                 <option value="oz">Per oz</option>
-                <option value="each">Each</option>
+                <option value="g">Per g</option>
+                <option value="kg">Per kg</option>
               </select>
             </div>
           </div>

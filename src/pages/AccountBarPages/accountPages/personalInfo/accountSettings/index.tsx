@@ -48,7 +48,7 @@ export default function accountSettings() {
         if (data) {
           if (data["userName"]) {
             setProfilePicture(data["profilePicture"]);
-            console.log(data["profilePicture"]);
+            // console.log(data["profilePicture"]);
             setUserName(data["userName"]);
             setFirstName(data["name"]);
             setMiddleName(data["middleName"]);
@@ -145,16 +145,12 @@ export default function accountSettings() {
             <div>
               {profilePicture !== undefined ? (
                 <img
-                  className="w-20 h-20"
+                  className="h-20"
                   src={profilePicture}
                   alt="Profile Picture"
                 />
               ) : (
-                <img
-                  className="w-20 h-20"
-                  src={avatar}
-                  alt="Profile Picture"
-                />
+                <img className="h-20" src={avatar} alt="Profile Picture" />
               )}
             </div>
             <div className="text-blue hover:text-purple underline cursor-pointer ml-auto">

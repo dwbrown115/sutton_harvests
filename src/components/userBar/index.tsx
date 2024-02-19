@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 
 import { firebase_app, logOut } from "../../firebase";
 import { notifications, shoppingCart, expand, avatar } from "../../assets";
-import { set } from "firebase/database";
 
 export default function userBar() {
   const router = useNavigate();
@@ -38,7 +37,9 @@ export default function userBar() {
   }, [user]);
 
   async function grabUser() {
+    // console.log("Grabbing user data");
     if (user) {
+      // console.log("Checked for user")
       const collection = "Users";
       const id = auth.currentUser.uid;
       const docRef = doc(db, collection, id);
@@ -140,7 +141,7 @@ export default function userBar() {
                     {name} {lastName}
                   </div>
                   {userName === "Choose a username" ? (
-                    <Link className="underline" to={"/account/profile"}>
+                    <Link className="underline" to={"/account/info"}>
                       Choose a username
                     </Link>
                   ) : (

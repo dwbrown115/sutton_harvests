@@ -1,10 +1,10 @@
-import { setBackupArray } from "../../helpers";
-import { getData, updateData, addData } from "../index";
-export default async function checkForBackup(id, ArrayName, path, contentType) {
-    let backup = await setBackupArray(id, ArrayName, path);
-    let snap = await getData("/ContentBackup", id);
+// import { setBackupArray } from "../../helpers";
+// import { getData, updateData, addData } from "../index";
+// export default async function checkForBackup(id, ArrayName, path, contentType) {
+//     let backup = await setBackupArray(id, ArrayName, path);
+//     let snap = await getData("/ContentBackup", id);
 
-    await addData(`/ContentBackup/${contentType}/${id}`, ArrayName, backup);
+//     await addData(`/ContentBackup/${contentType}/${id}`, ArrayName, backup);
 
     // console.log(backup);
     // if (snap) {
@@ -22,4 +22,4 @@ export default async function checkForBackup(id, ArrayName, path, contentType) {
     //         backup
     //     );
     // }
-}
+// }

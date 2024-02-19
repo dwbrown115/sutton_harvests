@@ -1,7 +1,7 @@
 import firebase_app from "../config";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 
-export default async function getData(collection, id) {
+export default async function getData(collection: string, id: string) {
     const db = getFirestore(firebase_app);
     const docRef = doc(db, collection, id);
     const docSnap = await getDoc(docRef);
