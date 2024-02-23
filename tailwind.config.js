@@ -27,6 +27,9 @@ export default {
         "3/4": "75%",
         full: "100%",
       },
+      padding: {
+        "1/2": "50%",
+      },
     },
   },
   plugins: [],

@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import "./searchBar.scss";
+import { set } from "firebase/database";
 
 export default function searchBar() {
   const router = useNavigate();
+  const url = window.location.href;
 
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
@@ -19,6 +21,25 @@ export default function searchBar() {
     router(queryUrl);
     router(0);
   };
+
+  useEffect(() => {
+    // console.log(url);
+    const splitUrl = url.split("/search+q/");
+    // let search = "";
+    // let category = "";
+    if (url.includes("/search+q/")) {
+      // search = splitUrl[1].split("&category+")[0];
+      // category = splitUrl[1].split("&category+")[1];
+      setSearch(splitUrl[1].split("&category+")[0].replaceAll("+", " "));
+      setCategory(splitUrl[1].split("&category+")[1]);
+    } else {
+      setSearch("");
+      setCategory("All");
+    }
+    // setSearch(search.replaceAll("+", " "));
+    // setCategory(category);
+  }, [url]);
+
   return (
     <div className="px-8 py-3 flex justify-between border-b border-slate-400">
       <Link

@@ -107,7 +107,7 @@ export default function createListing() {
       createdByUserId: auth.currentUser?.uid,
       created: time,
       title: title,
-      category: category,
+      category: category+"all",
       description: description,
       images: [] as string[],
       price: price,
@@ -116,6 +116,11 @@ export default function createListing() {
       shippingCost: shippingCost,
       freeShipping: freeShipping,
       zipCode: Number(zipCode),
+      // sold: false,
+      // soldTo: "",
+      // soldToId: "",
+      // soldDate: "",
+
     };
 
     uploadImages(images, "listings", title).then((urls) => {

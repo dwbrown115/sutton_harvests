@@ -16,9 +16,9 @@ export default function sellerListings() {
     auth.onAuthStateChanged(async (user) => {
       setListings([]);
       // console.log(user?.uid);
-      console.log("Grabbing listings");
+      // console.log("Grabbing listings");
       if (user) {
-        console.log("User is logged in");
+        // console.log("User is logged in");
         const data = await getData("Users", user.uid);
         if (data) {
           if (data["listings"]) {
