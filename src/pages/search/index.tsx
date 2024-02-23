@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import algoliasearch from "algoliasearch";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { ALGOLIA_APPLICATION_ID, ALGOLIA_SEARCH_KEY } from "../../../config";
-import { set } from "firebase/database";
 
 export default function search() {
   const [url, setUrl] = useState("");
@@ -62,65 +61,71 @@ export default function search() {
         </div>
         {/* <hr className="my-2 border-gray-300" /> */}
         <div>
-          {results.map((result, index) => {
-            // console.log(result.priceType);
-            return (
-              <div
-                className="flex py-2.5 mt-2.5 border-t border-b border-gray-300"
-                key={index}
-              >
-                <Link
-                  target="_blank"
-                  className="w-1/3"
-                  to={`/listing/${result.listingId}`}
-                >
-                  <img
-                    src={result.images[0]}
-                    alt={result.title}
-                    className="w-full"
-                  />
-                </Link>
-                <div className="flex flex-col pl-4">
-                  <Link
-                    className="text-3xl font-light hover:text-purple"
-                    target="_blank"
-                    to={`/listing/${result.listingId}`}
-                  >
-                    {result.title}
-                  </Link>
-                  <div className="flex mt-2.5">
-                    <div className="mr-10">
-                      <div className="text-3xl font-medium">
-                        ${result.price} per {result.priceType}
-                      </div>
-                      <div className="mt-2 text-gray-600">
-                        Number in stock: {result.quantity}
-                        {result.priceType}s
-                      </div>
-                      <div className="text-gray-600">
-                        {result.freeShipping ? (
-                          "Free Shipping"
-                        ) : (
-                          <div>Shipping: ${result.shippingCost}</div>
-                        )}
-                      </div>
-                    </div>
-                    <div>
+          {results.length ? (
+            <div>
+              {results.map((result, index) => {
+                // console.log(result.priceType);
+                return (
+                  <div>
+                    <div
+                      className="flex py-2.5 mt-2.5 border-t border-b border-gray-300"
+                      key={index}
+                    >
                       <Link
                         target="_blank"
-                        className="inline-block	text-l text-gray-600 hover:text-purple"
-                        to={`/user/${result.createdByUserId}`}
+                        className="w-1/3"
+                        to={`/listing/${result.listingId}`}
                       >
-                        {result.createdByUserName}
+                        <img
+                          src={result.images[0]}
+                          alt={result.title}
+                          className="w-full"
+                        />
                       </Link>
+                      <div className="flex flex-col pl-4">
+                        <Link
+                          className="text-3xl font-light hover:text-purple"
+                          target="_blank"
+                          to={`/listing/${result.listingId}`}
+                        >
+                          {result.title}
+                        </Link>
+                        <div className="flex mt-2">
+                          <div className="mr-10">
+                            <div className="text-3xl font-medium">
+                              ${result.price} per {result.priceType}
+                            </div>
+                            <div className="mt-2 text-gray-600">
+                              Number in stock: {result.quantity}
+                              {result.priceType}s
+                            </div>
+                            <div className="text-gray-600">
+                              {result.freeShipping ? (
+                                "Free Shipping"
+                              ) : (
+                                <div>Shipping: ${result.shippingCost}</div>
+                              )}
+                            </div>
+                          </div>
+                          <div>
+                            <Link
+                              target="_blank"
+                              className="inline-block	text-l text-gray-600 hover:text-purple"
+                              to={`/user/${result.createdByUserId}`}
+                            >
+                              {result.createdByUserName}
+                            </Link>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  {/* <div>Area code: {result.zipCode}</div> */}
-                </div>
-                {/* <hr className="my-2 border-gray-300" /> */}
-              </div>
-            );
-          })}
+                );
+              })}
+            </div>
+          ) : (
+            <div className="mt-1">No results found</div>
+          )}
         </div>
       </div>
     );
