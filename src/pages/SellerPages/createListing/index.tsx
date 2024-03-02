@@ -107,7 +107,7 @@ export default function createListing() {
       createdByUserId: auth.currentUser?.uid,
       created: time,
       title: title,
-      category: category+"all",
+      category: category + "+all",
       description: description,
       images: [] as string[],
       price: price,
@@ -120,7 +120,6 @@ export default function createListing() {
       // soldTo: "",
       // soldToId: "",
       // soldDate: "",
-
     };
 
     uploadImages(images, "listings", title).then((urls) => {
@@ -193,7 +192,7 @@ export default function createListing() {
               onChange={(e) => setCategory(e.target.value)}
               required
             >
-              <option value="none">Select</option>
+              <option value="">Select</option>
               <option value="Fruit">Fruits</option>
               <option value="Vegetable">Vegetables</option>
               <option value="Mushroom">Mushrooms</option>
@@ -289,7 +288,7 @@ export default function createListing() {
                 onChange={(e) => setPriceType(e.target.value)}
                 required
               >
-                <option value="none">Select</option>
+                <option value="">Select</option>
                 <option value="unit">Per unit</option>
                 <option value="dozen">Per dozen</option>
                 <option value="lb">Per lb</option>

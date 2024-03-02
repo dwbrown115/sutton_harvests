@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
 import "./searchBar.scss";
-import { set } from "firebase/database";
 
 export default function searchBar() {
   const router = useNavigate();
