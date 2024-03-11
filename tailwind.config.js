@@ -18,6 +18,13 @@ export default {
         "3665f3": "#3665f3",
         sidebarGray: "#e5e5e5",
       },
+      width: {
+        620: "620px",
+        723: "723px",
+      },
+      height: {
+        465: "465px",
+      },
       minWidth: {
         0: "0",
         "1/6": "16.666667%",

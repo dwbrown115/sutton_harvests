@@ -109,7 +109,7 @@ export default function userBar() {
                 width: "100%",
                 marginLeft: "auto",
                 marginRight: "auto",
-                zIndex: 1,
+                zIndex: 999,
               }}
             />
             <div
@@ -145,7 +145,7 @@ export default function userBar() {
                       Choose a username
                     </Link>
                   ) : (
-                    <Link className="underline" to={`/seller/${userName}`}>
+                    <Link className="underline" to={`/user/${userName}`}>
                       {userName}
                     </Link>
                   )}
@@ -215,7 +215,7 @@ export default function userBar() {
               width: "100%",
               marginLeft: "auto",
               marginRight: "auto",
-              zIndex: 1,
+              zIndex: 999,
             }}
           />
           <div
@@ -278,7 +278,7 @@ export default function userBar() {
               width: "100%",
               marginLeft: "auto",
               marginRight: "auto",
-              zIndex: 1,
+              zIndex: 999,
             }}
           />
           <div
@@ -333,7 +333,7 @@ export default function userBar() {
               width: "100%",
               marginLeft: "auto",
               marginRight: "auto",
-              zIndex: 1,
+              zIndex: 999,
             }}
           />
           <div

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { ALGOLIA_APPLICATION_ID, ALGOLIA_SEARCH_KEY } from "../../../config";
 
 export default function search() {
-  const [url, setUrl] = useState("");
+  // const [url, setUrl] = useState("");
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("");
   const [results, setResults] = useState<any[]>([]);
@@ -46,7 +46,7 @@ export default function search() {
       setSearch(search.replaceAll("+", " "));
       setCategory(category);
     }
-    setUrl(url);
+    // setUrl(url);
   }, []);
 
   function handleResults() {
@@ -55,8 +55,9 @@ export default function search() {
         <div>
           {/* <div>Search Results</div> */}
           <div>
-            <span className="font-bold">{numberResults}</span> results for{" "}
-            <span className="font-bold">{search}</span>
+            <span className="font-bold">{numberResults}</span> results{" "}
+            {search ? `for "${search}"` : ""}
+            {/* for <span className="font-bold">{search}</span> */}
           </div>
         </div>
         {/* <hr className="my-2 border-gray-300" /> */}
