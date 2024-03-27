@@ -83,10 +83,6 @@ export default function ListingPage() {
     }
   }
 
-  function handleStringLength(string: String, limit: number) {
-    return string.substring(0, limit);
-  }
-
   function handleSubmit(e: any) {
     e.preventDefault();
     console.log("started");
@@ -103,6 +99,8 @@ export default function ListingPage() {
           price: listing.price,
           priceType: listing.priceType,
           image: listing.images[0],
+          shippingCost: listing.shippingCost,
+          freeShipping: listing.freeShipping,
         };
         setDoc(
           doc(db, "Users", auth.currentUser.uid),
@@ -122,25 +120,25 @@ export default function ListingPage() {
             {images.map((image: any, index: any) => {
               return (
                 <div
-                  className={`w-24 h-24 overflow-hidden bg-gray-200 grid place-items-center	 ${
+                  className={`w-24 h-24 overflow-hidden bg-gray-200 grid place-items-center	hover:cursor-pointer ${
                     selectedImage === index ? "border-2 border-black" : ""
                   }`}
                   key={index}
+                  onClick={() => {
+                    setSelectedImage(index), console.log(selectedImage);
+                  }}
                 >
                   <img
-                    className={`w-full h-auto hover:cursor-pointer py-auto`}
+                    className={`w-full h-auto py-auto`}
                     src={image}
                     alt={listing.title}
-                    onClick={() => {
-                      setSelectedImage(index), console.log(selectedImage);
-                    }}
                   />
                 </div>
               );
             })}
           </div>
           <div className="ml-5 w-620 h-465">
-            <div className="flex relative bg-gray-200 z-0">
+            <div className="flex relative bg-gray-200">
               <div
                 className="absolute left-5 top-1/2 w-11	h-11 cursor-pointer my-auto z-10 bg-white border-0 rounded-full	drop-shadow-lg py-auto grid place-items-center"
                 onClick={handleImageBackward}

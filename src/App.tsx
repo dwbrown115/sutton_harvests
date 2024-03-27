@@ -30,7 +30,7 @@ import {
 // Auth pages
 import { forgotPassword, signin, signup } from "./pages/Auth";
 
-import { home, search } from "./pages";
+import { home, search, shoppingCart } from "./pages";
 import { UserBar, SearchBar, VerifyEmailBar } from "./components";
 
 import "./App.scss";
@@ -43,6 +43,7 @@ function App() {
       <VerifyEmailBar />
       <Routes>
         <Route path="/" element={home()} />
+        <Route path="/shopping-cart" element={shoppingCart()} />
         {/*Account bar pages*/}
         <Route path="/activity" element={accountActivity()} />
         <Route path="/messages" element={accountMessages()} />

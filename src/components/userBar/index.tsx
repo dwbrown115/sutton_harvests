@@ -20,6 +20,8 @@ export default function userBar() {
   const [showNotificationsHr, setShowNotificationsHr] = useState("transparent");
   const [showShoppingCart, setShowShoppingCart] = useState("none");
   const [showShoppingCartHr, setShowShoppingCartHr] = useState("transparent");
+  const [shoppingCartItems, setShoppingCartItems] = useState<any>([]);
+  const [shoppingCartTotal, setShoppingCartTotal] = useState(0);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [profilePicture, setProfilePicture] = useState("");
@@ -35,6 +37,24 @@ export default function userBar() {
       }
     });
   }, [user]);
+
+  // useEffect(() => {
+  //   console.log("Shopping Cart Total: ", shoppingCartTotal);
+  // }, [shoppingCartTotal]);
+
+  useEffect(() => {
+    console.log(shoppingCartItems);
+    if (shoppingCartItems.length !== 0) {
+      let total = 0;
+      shoppingCartItems.map((item: any) => {
+        if (item["shippingCost"] !== 0 && item["shippingCost"] !== null) {
+          total += item["shippingCost"];
+        }
+        total += item["price"] * item["quantity"];
+      });
+      setShoppingCartTotal(total);
+    }
+  }, [shoppingCartItems]);
 
   async function grabUser() {
     // console.log("Grabbing user data");
@@ -53,6 +73,9 @@ export default function userBar() {
           setProfilePicture(data["profilePicture"]);
           setName(data["name"]);
           setLastName(data["lastName"]);
+          if (data["cart"]) {
+            setShoppingCartItems(data["cart"]);
+          }
         }
       } catch (e) {
         console.log(e);
@@ -64,6 +87,74 @@ export default function userBar() {
     logOut();
     router(0);
     router("/");
+  }
+
+  function handleShoppingCart() {
+    return (
+      <div className="pl-5 pb-5 w-245">
+        {shoppingCartItems?.length > 0 ? (
+          <div>
+            {shoppingCartItems.map((item: any, index: number) => {
+              // setShoppingCartTotal(shoppingCartTotal + item["price"] * item["quantity"])
+              return (
+                <div key={index} className="flex mb-2">
+                  <div className="grid place-items-center">
+                    <img
+                      className="w-24 h-auto"
+                      src={item["image"]}
+                      alt={item["name"]}
+                    />
+                  </div>
+                  <div className="flex flex-col ml-2">
+                    <Link
+                      className="hover:underline"
+                      to={`/product/${item["id"]}`}
+                    >
+                      {item["title"]}
+                    </Link>
+                    <div className="flex flex-col">
+                      <div className="text-sm">
+                        ${item["price"]} per {item["priceType"]}
+                      </div>
+                      <div className="text-sm">Qty: {item["quantity"]}</div>
+                    </div>
+                    <div>
+                      {item["freeShipping"] === true ? (
+                        <div className="text-sm">Free Shipping</div>
+                      ) : (
+                        <div className="text-sm">
+                          Shipping: ${item["shippingCost"]}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+            <div className="flex justify-center">
+              <div className="mr-1">Total:</div>
+              <div>${shoppingCartTotal}</div>
+            </div>
+            <div className="flex flex-col space-y-1 mt-2">
+              <Link
+                className="px-10 py-3 bg-3665f3 text-white ml-0 text-center hover:bg-white hover:text-3665f3 border border-3665f3"
+                to={"/checkout"}
+              >
+                Checkout
+              </Link>
+              <Link
+                className="px-10 py-3 bg-white text-3665f3 ml-0 text-center border border-3665f3 hover:bg-3665f3 hover:text-white"
+                to={"/cart"}
+              >
+                View Cart
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div>Nothing is currently in your cart.</div>
+        )}
+      </div>
+    );
   }
 
   function handleUser() {
@@ -337,16 +428,14 @@ export default function userBar() {
             }}
           />
           <div
-            className="pr-10 pt-5 flex-col fixed bg-white border border-slate-400"
+            className="pr-10 pt-5 flex-col absolute bg-white border border-slate-400"
             style={{
               display: `${showShoppingCart}`,
               marginLeft: "-244.5px",
               marginTop: "33px",
             }}
           >
-            <div className="pl-5 pb-5 w-2/3">
-              Nothing is currently in your cart.
-            </div>
+            {handleShoppingCart()}
           </div>
         </div>
       </div>

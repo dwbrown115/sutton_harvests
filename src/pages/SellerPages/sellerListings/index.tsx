@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import { getAuth } from "firebase/auth";
 
 import { SalesDashNav } from "../../../components";
-import { firebase_app, getData } from "../../../firebase";
+import { firebase_app, getData, deleteData, addData } from "../../../firebase";
 
 export default function sellerListings() {
   const auth = getAuth(firebase_app);
 
   const [listings, setListings] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [confirmDelete, setConfirmDelete] = useState<any[]>([]);
 
   const grabListings = useCallback(() => {
     setIsLoading(true);
@@ -25,6 +26,7 @@ export default function sellerListings() {
             for (let i = 0; i < data["listings"].length; i++) {
               const listing = await getData("listings", data["listings"][i]);
               setListings((prev: any[]) => [...prev, listing]);
+              setConfirmDelete((prev: any) => [...prev, false]);
             }
           }
         }
@@ -32,6 +34,41 @@ export default function sellerListings() {
     });
     setIsLoading(false);
   }, []);
+
+  const deleteListing = async (listingId: string) => {
+    // deleteData("listings", listingId);
+    const user = auth.currentUser;
+    if (user) {
+      const data = await getData("Users", user.uid);
+      if (data) {
+        console.log(data["listings"]);
+        let array = data["listings"];
+        // array.splice(l)
+        array = array.filter((item: string) => item !== listingId);
+        // console.log(array);
+        const updatedData = { listings: array };
+        addData("Users", user.uid, updatedData);
+        deleteData("listings", listingId);
+      }
+    }
+    // listings.splice(arrayIndex, 1);
+  };
+
+  function changeToTrue(index: number) {
+    const newArray = [...confirmDelete];
+    newArray[index] = true;
+    setConfirmDelete(newArray);
+  }
+
+  function changeToFalse(index: number) {
+    const newArray = [...confirmDelete];
+    newArray[index] = false;
+    setConfirmDelete(newArray);
+  }
+
+  // useEffect(() => {
+  //   console.log(listings);
+  // }, [listings]);
 
   // window.onload = grabListings;
   useEffect(() => {
@@ -70,12 +107,43 @@ export default function sellerListings() {
                     <p className="text-gray-500">${listing.price}</p>
                     <p className="text-gray-500">{listing.quantity} in stock</p>
                   </div>
-                  <Link
-                    className="h-1/2 my-auto px-5 py-2 rounded-md	border border-3665f3 bg-3665f3 text-white hover:bg-gray-100 hover:text-3665f3"
-                    to={`/sales/edit-listing/${listing.listingId}`}
-                  >
-                    Edit
-                  </Link>
+                  <div className="my-auto flex">
+                    <Link
+                      className="h-1/2 px-5 py-2 rounded-md	border border-3665f3 bg-3665f3 text-white hover:bg-gray-100 hover:text-3665f3"
+                      to={`/sales/edit-listing/${listing.listingId}`}
+                    >
+                      Edit
+                    </Link>
+                    {confirmDelete[index] ? (
+                      <div className="flex h-full">
+                        <button
+                          className="h-1/2 px-5 py-2 ml-1 rounded-md	border border-3665f3 hover:bg-3665f3 hover:text-white bg-gray-100 text-3665f3"
+                          onClick={() => deleteListing(listing.listingId)}
+                        >
+                          Confirm delete
+                        </button>
+                        <button
+                          className="h-1/2 px-5 py-2 ml-1 rounded-md	border border-3665f3 bg-3665f3 text-white hover:bg-gray-100 hover:text-3665f3"
+                          // onClick={() => setConfirmDelete(false)}
+                          onClick={() => {
+                            changeToFalse(index);
+                          }}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    ) : (
+                      <button
+                        className="h-1/2 px-5 py-2 ml-1 rounded-md	border border-3665f3 hover:bg-3665f3 hover:text-white bg-gray-100 text-3665f3"
+                        // onClick={() => setConfirmDelete(true)}
+                        onClick={() => {
+                          changeToTrue(index);
+                        }}
+                      >
+                        Delete
+                      </button>
+                    )}
+                  </div>
                 </div>
               );
             })}

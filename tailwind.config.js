@@ -21,6 +21,7 @@ export default {
       width: {
         620: "620px",
         723: "723px",
+        245: "245px",
       },
       height: {
         465: "465px",
