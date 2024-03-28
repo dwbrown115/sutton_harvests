@@ -10,6 +10,7 @@ import { getAuth } from "firebase/auth";
 import { Link } from "react-router-dom";
 
 import { firebase_app } from "../../../firebase";
+import { set } from "firebase/database";
 
 export default function ListingPage() {
   const url = window.location.href;
@@ -27,6 +28,10 @@ export default function ListingPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    console.log("url", url);
+  }, [url]);
+
   async function grabUser(location: string) {
     const docRef = doc(db, "Users", location);
     const docSnap = await getDoc(docRef);
@@ -43,6 +48,7 @@ export default function ListingPage() {
   }
 
   async function getListing() {
+    setLoading(true);
     const listingId = url.split("/listing/");
     console.log(listingId[1]);
     const docRef = doc(db, "listings", listingId[1]);
@@ -67,7 +73,7 @@ export default function ListingPage() {
 
   useEffect(() => {
     getListing();
-  }, []);
+  }, [url]);
 
   function handleImageForward() {
     if (selectedImage <= images.length - 2) {
