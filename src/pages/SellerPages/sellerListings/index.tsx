@@ -9,11 +9,11 @@ export default function sellerListings() {
   const auth = getAuth(firebase_app);
 
   const [listings, setListings] = useState<any[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
   const [confirmDelete, setConfirmDelete] = useState<any[]>([]);
 
   const grabListings = useCallback(() => {
-    setIsLoading(true);
+    // setIsLoading(true);
     auth.onAuthStateChanged(async (user) => {
       setListings([]);
       // console.log(user?.uid);
@@ -32,10 +32,10 @@ export default function sellerListings() {
         }
       }
     });
-    setIsLoading(false);
+    // setIsLoading(false);
   }, []);
 
-  const deleteListing = async (listingId: string) => {
+  const deleteListing = async (listingId: string, index: number) => {
     // deleteData("listings", listingId);
     const user = auth.currentUser;
     if (user) {
@@ -43,9 +43,12 @@ export default function sellerListings() {
       if (data) {
         console.log(data["listings"]);
         let array = data["listings"];
+        let listingArray = [...listings];
         // array.splice(l)
         array = array.filter((item: string) => item !== listingId);
         // console.log(array);
+        listingArray.splice(index, 1);
+        setListings(listingArray);
         const updatedData = { listings: array };
         addData("Users", user.uid, updatedData);
         deleteData("listings", listingId);
@@ -118,7 +121,7 @@ export default function sellerListings() {
                       <div className="flex h-full">
                         <button
                           className="h-1/2 px-5 py-2 ml-1 rounded-md	border border-3665f3 hover:bg-3665f3 hover:text-white bg-gray-100 text-3665f3"
-                          onClick={() => deleteListing(listing.listingId)}
+                          onClick={() => deleteListing(listing.listingId, index)}
                         >
                           Confirm delete
                         </button>
