@@ -91,6 +91,7 @@ export default function accountSettings() {
   function handleEditProfilePictureForm(e: any) {
     e.preventDefault();
     setEditProfilePicture(false);
+    setProfilePicture(URL.createObjectURL(profilePictureArray[0]));
     if (auth.currentUser) {
       // uploadImages("Users", auth.currentUser.uid, profilePictureArray);
       uploadImages(
@@ -99,7 +100,9 @@ export default function accountSettings() {
         `${auth.currentUser.uid}_profilePicture`
       ).then((res) => {
         if (auth.currentUser) {
+          // console.log(res);
           updateData("Users", auth.currentUser.uid, { profilePicture: res });
+          setProfilePicture(res[0]);
         }
       });
     }
