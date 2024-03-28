@@ -64,9 +64,10 @@ export default function editListing() {
         getListing();
       }
     });
-  }, [user]);
+  }, [url]);
 
   async function getListing() {
+    setLoading(true);
     const listingId = url.split("/seller/edit-listing/");
     // console.log(listingId[1]);
     const docRef = doc(db, "listings", listingId[1]);
@@ -418,6 +419,7 @@ export default function editListing() {
                     type="checkbox"
                     className="border border-gray-700 w-1/4 py-2.5 mt-2 bg-gray-100 text-gray-900 focus:outline-none"
                     onChange={(e) => setFreeShipping(e.target.checked)}
+                    // value={Boolean(freeShipping)}
                   />
                   <div className="text-sm text-gray-600">Free shipping</div>
                 </div>
@@ -476,7 +478,7 @@ export default function editListing() {
           {authorized ? (
             handleEditListing()
           ) : (
-            <div className="w-full text-center text-5xl mt-5">Unauthorized</div>
+            <div className="w-full text-center text-5xl mt-5">You are not authorized to edit this page</div>
           )}
         </div>
       )}

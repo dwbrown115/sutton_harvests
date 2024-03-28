@@ -85,7 +85,7 @@ export default function userBar() {
 
   function handleSignout() {
     logOut();
-    router(0);
+    // router(0);
     router("/");
   }
 

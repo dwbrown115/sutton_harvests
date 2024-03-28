@@ -10,7 +10,6 @@ import { getAuth } from "firebase/auth";
 import { Link } from "react-router-dom";
 
 import { firebase_app } from "../../../firebase";
-import { set } from "firebase/database";
 
 export default function ListingPage() {
   const url = window.location.href;
