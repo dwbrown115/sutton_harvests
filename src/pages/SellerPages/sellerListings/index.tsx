@@ -113,7 +113,9 @@ export default function sellerListings() {
                       {listing.title}
                     </Link>
                     <p className="text-gray-500">${listing.price}</p>
-                    <p className="text-gray-500">{listing.quantity} in stock</p>
+                    <p className="text-gray-500">
+                      {listing.quantity} {listing.priceType} in stock
+                    </p>
                   </div>
                   <div className="my-auto flex">
                     <Link
