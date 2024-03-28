@@ -122,7 +122,7 @@ export default function createListing() {
       // soldDate: "",
     };
 
-    uploadImages(images, "listings", title).then((urls) => {
+    uploadImages(images, "listings", id).then((urls) => {
       listing["images"] = urls;
       // setListing({ ...listing, images: urls });
       // databaseAddData(`listings/${id}`, listing).then((res) => {
@@ -157,6 +157,12 @@ export default function createListing() {
       setShippingError("Please enter a shipping cost or select free shipping.");
       return;
     }
+  }
+
+  function handleDeleteImage(index: number, array: any[]) {
+    let newArray = [...array];
+    newArray.splice(index, 1);
+    return newArray;
   }
 
   return (
@@ -221,6 +227,16 @@ export default function createListing() {
                       <div className="text-sm text-gray-600">
                         Image {index + 1}
                       </div>
+                      <button
+                        type="button"
+                        className="text-sm text-red"
+                        onClick={() => {
+                          //   console.log("click");
+                          setImages(handleDeleteImage(index, images));
+                        }}
+                      >
+                        Delete
+                      </button>
                     </div>
                   );
                 })}

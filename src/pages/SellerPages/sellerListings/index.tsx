@@ -106,14 +106,19 @@ export default function sellerListings() {
                   className="flex justify-between p-5 my-1 border border-gray-100 rounded-md bg-gray-100"
                 >
                   <div className="flex flex-col">
-                    <h1 className="text-xl font-semibold">{listing.title}</h1>
+                    <Link
+                      to={`/listing/${listing.listingId}`}
+                      className="text-xl font-semibold hover:text-3665f3"
+                    >
+                      {listing.title}
+                    </Link>
                     <p className="text-gray-500">${listing.price}</p>
                     <p className="text-gray-500">{listing.quantity} in stock</p>
                   </div>
                   <div className="my-auto flex">
                     <Link
                       className="h-1/2 px-5 py-2 rounded-md	border border-3665f3 bg-3665f3 text-white hover:bg-gray-100 hover:text-3665f3"
-                      to={`/sales/edit-listing/${listing.listingId}`}
+                      to={`/seller/edit-listing/${listing.listingId}`}
                     >
                       Edit
                     </Link>
@@ -121,7 +126,9 @@ export default function sellerListings() {
                       <div className="flex h-full">
                         <button
                           className="h-1/2 px-5 py-2 ml-1 rounded-md	border border-3665f3 hover:bg-3665f3 hover:text-white bg-gray-100 text-3665f3"
-                          onClick={() => deleteListing(listing.listingId, index)}
+                          onClick={() =>
+                            deleteListing(listing.listingId, index)
+                          }
                         >
                           Confirm delete
                         </button>

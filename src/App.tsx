@@ -24,6 +24,7 @@ import {
   sellerSummary,
   listingPage,
   createListing,
+  editListing,
   user,
 } from "./pages/SellerPages";
 
@@ -62,6 +63,7 @@ function App() {
         <Route path="/sales/summary" element={sellerSummary()} />
         <Route path="/listing/:id" element={listingPage()} />
         <Route path="/seller/create-listing" element={createListing()} />
+        <Route path="/seller/edit-listing/:id" element={editListing()} />
         {/* <Route path="/account/sales" element={sellerAccount()} /> */}
         {/*Auth pages*/}
         <Route path="/forgot-password" element={forgotPassword()} />

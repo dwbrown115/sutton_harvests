@@ -6,4 +6,5 @@ export { default as sellerOrders } from './sellerOrders';
 export { default as sellerSummary } from './sellerSummary';
 export { default as listingPage } from './listingPage';
 export { default as createListing } from './createListing';
+export { default as editListing } from './editListing';
 export { default as user } from './user';
